@@ -9,15 +9,13 @@ import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
 
 export default function Home(): JSX.Element {
-  const images = async ({ pageParam = 0 }) => {
-    const result = await api.get(`/api/images?after=${pageParam}`);
-
-    const { data, after } = result.data;
-
-    return {
-      data,
-      after,
-    };
+  const images = async ({ pageParam = null }) => {
+    const response = await api.get('/api/images', {
+      params: {
+        after: pageParam,
+      },
+    });
+    return response.data;
   };
   const {
     data,
